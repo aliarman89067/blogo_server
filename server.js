@@ -3,10 +3,12 @@ import express from "express";
 import cors from "cors";
 import { createServer } from "http";
 import dotenv from "dotenv";
+import serverless from "serverless-http";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
 dotenv.config();
+
 app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -32,3 +34,4 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log("app is running on port ", PORT);
 });
+export const handler = serverless(app);
